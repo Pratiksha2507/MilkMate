@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Milk Collection - MilkMate</title>
+
+    <link rel="stylesheet" href="/css/milk-collection.css">
+</head>
+
+<body>
+
+<body>
+
+<!-- BACK TO DASHBOARD -->
+<div style="padding: 15px 20px; background: #f5f7fb;">
+    <a href="admin-dashboard.html"
+       style="display:inline-block;
+              padding:10px 18px;
+              background:#1f4e79;
+              color:white;
+              text-decoration:none;
+              border-radius:6px;
+              font-weight:600;">
+        ← Back to Dashboard
+    </a>
+</div>
+
+<div class="container">
+<div class="container">
+
+    <!-- HEADER -->
+    <div class="header">
+        <h1>Milk Collection</h1>
+        <p>MilkMate Dairy Management System</p>
+    </div>
+
+    <!-- MESSAGE -->
+    <div id="message"></div>
+
+
+    <!-- ============================= -->
+    <!-- RECORD MILK COLLECTION -->
+    <!-- ============================= -->
+
+    <div class="card">
+
+        <h2>Record Milk Collection</h2>
+
+        <form id="milkCollectionForm">
+
+            <!-- Farmer -->
+            <div class="form-group">
+
+                <label>Farmer</label>
+
+                <select id="farmerId" required>
+
+                    <option value="">
+                        Select Farmer
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- Date -->
+            <div class="form-group">
+
+                <label>Collection Date</label>
+
+                <input
+                    type="date"
+                    id="collectionDate"
+                    required>
+
+            </div>
+
+
+            <!-- Session -->
+            <div class="form-group">
+
+                <label>Session</label>
+
+                <select id="session" required>
+
+                    <option value="">
+                        Select Session
+                    </option>
+
+                    <option value="MORNING">
+                        Morning
+                    </option>
+
+                    <option value="EVENING">
+                        Evening
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- Quantity -->
+            <div class="form-group">
+
+                <label>Milk Quantity (Liters)</label>
+
+                <input
+                    type="number"
+                    id="quantity"
+                    step="0.01"
+                    min="0.01"
+                    placeholder="Enter quantity"
+                    required>
+
+            </div>
+
+
+            <!-- Fat -->
+            <div class="form-group">
+
+                <label>Fat %</label>
+
+                <input
+                    type="number"
+                    id="fat"
+                    step="0.01"
+                    min="0"
+                    placeholder="Enter fat">
+
+            </div>
+
+
+            <!-- SNF -->
+            <div class="form-group">
+
+                <label>SNF %</label>
+
+                <input
+                    type="number"
+                    id="snf"
+                    step="0.01"
+                    min="0"
+                    placeholder="Enter SNF">
+
+            </div>
+
+
+            <!-- Automatic Rate -->
+            <div class="rate-box">
+
+                <span>Milk Rate</span>
+
+                <strong id="rate">
+                    ₹0.00 / L
+                </strong>
+
+            </div>
+
+
+            <!-- Total Amount -->
+            <div class="total-box">
+
+                <span>Total Amount</span>
+
+                <strong id="totalAmount">
+                    ₹0.00
+                </strong>
+
+            </div>
+
+
+            <!-- Save Button -->
+            <button
+                type="submit"
+                id="saveBtn">
+
+                Save Milk Collection
+
+            </button>
+
+        </form>
+
+    </div>
+
+
+    <!-- ===================================== -->
+    <!-- MILK COLLECTION RECORDS -->
+    <!-- ===================================== -->
+
+    <div class="card records-card">
+
+        <div class="records-header">
+
+            <div>
+                <h2>Milk Collection Records</h2>
+
+                <p class="records-subtitle">
+                    View and manage farmer milk collection history
+                </p>
+            </div>
+
+            <button
+                type="button"
+                id="refreshBtn"
+                class="refresh-btn">
+
+                Refresh Records
+
+            </button>
+
+        </div>
+
+
+        <!-- FILTER SECTION -->
+
+        <div class="filter-section">
+
+            <!-- Farmer Filter -->
+            <div class="filter-group">
+
+                <label>Farmer</label>
+
+                <select id="filterFarmer">
+
+                    <option value="">
+                        All Farmers
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- From Date -->
+            <div class="filter-group">
+
+                <label>From Date</label>
+
+                <input
+                    type="date"
+                    id="filterFromDate">
+
+            </div>
+
+
+            <!-- To Date -->
+            <div class="filter-group">
+
+                <label>To Date</label>
+
+                <input
+                    type="date"
+                    id="filterToDate">
+
+            </div>
+
+
+            <!-- Search -->
+            <div class="filter-group search-group">
+
+                <label>Search</label>
+
+                <input
+                    type="text"
+                    id="searchRecords"
+                    placeholder="Search farmer...">
+
+            </div>
+
+        </div>
+
+
+        <!-- TABLE -->
+
+        <div class="table-container">
+
+            <table id="recordsTable">
+
+                <thead>
+
+                    <tr>
+
+                        <th>Date</th>
+
+                        <th>Farmer</th>
+
+                        <th>Session</th>
+
+                        <th>Quantity (L)</th>
+
+                        <th>Fat %</th>
+
+                        <th>SNF %</th>
+
+                        <th>Rate</th>
+
+                        <th>Amount</th>
+
+                        <th>Actions</th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="recordsTableBody">
+
+                    <tr>
+
+                        <td
+                            colspan="9"
+                            class="no-records">
+
+                            Loading records...
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+        <!-- RECORD COUNT -->
+
+        <div class="records-footer">
+
+            <span id="recordCount">
+                Total Records: 0
+            </span>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script src="/js/milk-collection.js"></script>
+
+</body>
+
+</html>

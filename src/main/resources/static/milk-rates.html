@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>MilkMate | Milk Rates</title>
+
+    <link rel="stylesheet"
+          href="css/style.css">
+
+</head>
+
+<body>
+<body>
+
+<!-- BACK TO DASHBOARD -->
+<div style="padding: 15px 20px; background: #f5f7fb;">
+    <a href="admin-dashboard.html"
+       style="display:inline-block;
+              padding:10px 18px;
+              background:#1f4e79;
+              color:white;
+              text-decoration:none;
+              border-radius:6px;
+              font-weight:600;">
+        ← Back to Dashboard
+    </a>
+</div>
+
+<div class="dashboard-layout">
+
+<div class="dashboard-layout">
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="sidebar">
+
+        <div class="sidebar-logo">
+            🥛 <span>MilkMate</span>
+        </div>
+
+
+        <div class="sidebar-menu">
+
+            <a href="admin-dashboard.html"
+               class="menu-item">
+                📊 Dashboard
+            </a>
+
+            <a href="farmer-management.html"
+               class="menu-item">
+                👨‍🌾 Farmers
+            </a>
+
+            <a href="milk-collection.html"
+               class="menu-item">
+                🥛 Milk Collection
+            </a>
+
+            <a href="milk-rates.html"
+               class="menu-item active">
+                💰 Milk Rates
+            </a>
+
+            <a href="payments.html"
+               class="menu-item">
+                💳 Payments
+            </a>
+
+            <a href="monthly-accounts.html"
+               class="menu-item">
+                📅 Monthly Accounts
+            </a>
+
+            <a href="reports.html"
+               class="menu-item">
+                📈 Reports
+            </a>
+
+            <a href="notifications.html"
+               class="menu-item">
+                🔔 Notifications
+            </a>
+
+        </div>
+
+
+        <div class="sidebar-bottom">
+
+            <button onclick="logout()"
+                    class="logout-btn">
+
+                🚪 Logout
+
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="main-content">
+
+
+        <!-- TOPBAR -->
+
+        <header class="topbar">
+
+            <div>
+
+                <h1>
+                    Milk Rates
+                </h1>
+
+                <p>
+                    Manage daily milk purchase rates
+                </p>
+
+            </div>
+
+
+            <div class="admin-profile">
+
+                <div class="profile-icon">
+                    👤
+                </div>
+
+                <div>
+
+                    <strong id="adminName">
+                        Admin
+                    </strong>
+
+                    <small>
+                        Administrator
+                    </small>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- ================= ADD RATE ================= -->
+
+        <section class="dashboard-section">
+
+
+            <div class="section-header">
+
+                <div>
+
+                    <h2>
+                        Add Milk Rate
+                    </h2>
+
+                    <p>
+                        Set the rate per liter and effective date
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <form id="rateForm">
+
+
+                <div class="farmer-form-grid">
+
+
+                    <!-- RATE -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Rate Per Liter (₹)
+                        </label>
+
+                        <input
+                            type="number"
+                            id="ratePerLiter"
+                            placeholder="Example: 42"
+                            step="0.01"
+                            min="0"
+                            required>
+
+                    </div>
+
+
+
+                    <!-- EFFECTIVE FROM -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Effective From
+                        </label>
+
+                        <input
+                            type="date"
+                            id="effectiveFrom"
+                            required>
+
+                    </div>
+
+
+
+                    <!-- EFFECTIVE TO -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Effective To
+                        </label>
+
+                        <input
+                            type="date"
+                            id="effectiveTo">
+
+                    </div>
+
+
+
+                    <!-- ACTIVE -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Status
+                        </label>
+
+                        <select id="active">
+
+                            <option value="true">
+                                Active
+                            </option>
+
+                            <option value="false">
+                                Inactive
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <button
+                    type="submit"
+                    class="login-btn farmer-submit-btn">
+
+                    ➕ Add Milk Rate
+
+                </button>
+
+
+            </form>
+
+
+            <p id="rateMessage"></p>
+
+
+        </section>
+
+
+
+        <!-- ================= RATE LIST ================= -->
+
+        <section class="dashboard-section farmer-list-section">
+
+
+            <div class="section-header">
+
+                <div>
+
+                    <h2>
+                        Milk Rate History
+                    </h2>
+
+                    <p>
+                        All configured milk rates
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="table-container">
+
+
+                <table class="farmer-table">
+
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                ID
+                            </th>
+
+                            <th>
+                                Rate / Liter
+                            </th>
+
+                            <th>
+                                Effective From
+                            </th>
+
+                            <th>
+                                Effective To
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                            <th>
+                                Action
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+
+                    <tbody id="rateTableBody">
+
+                        <tr>
+
+                            <td colspan="6">
+                                Loading rates...
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+
+                </table>
+
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+</div>
+
+
+<script src="js/milk-rates.js"></script>
+
+</body>
+
+</html>

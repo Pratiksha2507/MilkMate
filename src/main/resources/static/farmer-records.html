@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Records - MilkMate</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f5f7fb;
+            color: #222;
+        }
+
+        .navbar {
+            background: #198754;
+            color: white;
+            padding: 16px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar h2 {
+            font-size: 22px;
+        }
+
+        .back-btn {
+            color: white;
+            text-decoration: none;
+            font-size: 15px;
+        }
+
+        .container {
+            width: 92%;
+            max-width: 1100px;
+            margin: 30px auto;
+        }
+
+        .header {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+            margin-bottom: 25px;
+        }
+
+        .header h1 {
+            margin-bottom: 8px;
+            color: #198754;
+        }
+
+        .header p {
+            color: #666;
+        }
+
+        .message {
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .error {
+            background: #ffe5e5;
+            color: #b30000;
+        }
+
+        .success {
+            background: #e5f8ed;
+            color: #087443;
+        }
+
+        .table-box {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 700px;
+        }
+
+        th {
+            background: #198754;
+            color: white;
+            padding: 13px;
+            text-align: center;
+        }
+
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+            text-align: center;
+        }
+
+        tr:hover {
+            background: #f7f7f7;
+        }
+
+        .no-data {
+            text-align: center;
+            padding: 30px;
+            color: #777;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 30px;
+            color: #198754;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="navbar">
+        <h2>🥛 MilkMate</h2>
+
+        <a href="farmer-dashboard.html" class="back-btn">
+            ← Back to Dashboard
+        </a>
+    </div>
+
+
+    <div class="container">
+
+        <div class="header">
+            <h1>🥛 My Milk Records</h1>
+            <p>Your milk collection records</p>
+        </div>
+
+
+        <div id="errorMessage" class="message error"></div>
+
+        <div id="successMessage" class="message success"></div>
+
+
+        <div class="table-box">
+
+            <div id="loading" class="loading">
+                Loading your milk records...
+            </div>
+
+            <table id="recordsTable" style="display:none;">
+
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Quantity (L)</th>
+                        <th>Fat</th>
+                        <th>SNF</th>
+                        <th>Rate</th>
+                        <th>Total Amount</th>
+                    </tr>
+                </thead>
+
+                <tbody id="recordsBody">
+                </tbody>
+
+            </table>
+
+            <div id="noData" class="no-data" style="display:none;">
+                No milk records found.
+            </div>
+
+        </div>
+
+    </div>
+
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    loadRecords();
+
+});
+
+
+async function loadRecords() {
+
+    const token = localStorage.getItem("token");
+
+    const mobile = localStorage.getItem("mobile");
+
+
+    // Login check
+    if (!token) {
+
+        window.location.href = "farmer-login.html";
+
+        return;
+    }
+
+
+    if (!mobile) {
+
+        showError("Farmer mobile number not found. Please login again.");
+
+        return;
+    }
+
+
+    console.log("Farmer Mobile:", mobile);
+
+
+    try {
+
+        /*
+         * IMPORTANT:
+         * Controller endpoint:
+         *
+         * GET /api/farmer/records/mobile/{mobile}
+         */
+
+        const response = await fetch(
+            "/api/farmer/records/mobile/" +
+            encodeURIComponent(mobile),
+            {
+                method: "GET",
+
+                headers: {
+                    "Accept": "application/json",
+                    "Authorization": "Bearer " + token
+                }
+            }
+        );
+
+
+        console.log("Response status:", response.status);
+
+
+        if (!response.ok) {
+
+            const errorText = await response.text();
+
+            console.error("API Error:", errorText);
+
+            throw new Error(
+                "Records API failed. Status: " +
+                response.status
+            );
+        }
+
+
+        const records = await response.json();
+
+        console.log("Records:", records);
+
+
+        document.getElementById("loading").style.display = "none";
+
+
+        if (!records || records.length === 0) {
+
+            document.getElementById("noData").style.display = "block";
+
+            return;
+        }
+
+
+        displayRecords(records);
+
+
+    } catch (error) {
+
+        console.error(error);
+
+        document.getElementById("loading").style.display = "none";
+
+        showError(
+            "Milk collection data load झाले नाही. " +
+            "Please try again."
+        );
+
+    }
+
+}
+
+
+function displayRecords(records) {
+
+    const table = document.getElementById("recordsTable");
+
+    const tbody = document.getElementById("recordsBody");
+
+
+    tbody.innerHTML = "";
+
+
+    records.forEach(function (record) {
+
+        const row = document.createElement("tr");
+
+
+        row.innerHTML = `
+
+            <td>
+                ${record.collectionDate || record.date || "-"}
+            </td>
+
+            <td>
+                ${record.quantity || 0}
+            </td>
+
+            <td>
+                ${record.fat || "-"}
+            </td>
+
+            <td>
+                ${record.snf || "-"}
+            </td>
+
+            <td>
+                ₹${record.rate || 0}
+            </td>
+
+            <td>
+                ₹${record.totalAmount || 0}
+            </td>
+
+        `;
+
+
+        tbody.appendChild(row);
+
+    });
+
+
+    table.style.display = "table";
+
+}
+
+
+function showError(message) {
+
+    const errorBox = document.getElementById("errorMessage");
+
+    errorBox.innerText = message;
+
+    errorBox.style.display = "block";
+
+}
+
+</script>
+
+</body>
+</html>

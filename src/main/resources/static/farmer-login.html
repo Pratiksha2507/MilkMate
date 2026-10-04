@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>MilkMate | Farmer Login</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #eff6ff, #f8fafc);
+        }
+
+        .login-container {
+            width: 390px;
+            max-width: 92%;
+            background: white;
+            padding: 35px;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .logo {
+            text-align: center;
+            font-size: 34px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .title {
+            text-align: center;
+            font-size: 26px;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #64748b;
+            margin-bottom: 28px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #334155;
+        }
+
+        input {
+            width: 100%;
+            padding: 13px 14px;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            font-size: 16px;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #2563eb;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 10px;
+            background: #2563eb;
+            color: white;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 8px;
+        }
+
+        .login-btn:hover {
+            background: #1d4ed8;
+        }
+
+        .login-btn:disabled {
+            background: #94a3b8;
+            cursor: not-allowed;
+        }
+
+        .back-btn {
+            display: block;
+            text-align: center;
+            margin-top: 18px;
+            text-decoration: none;
+            color: #2563eb;
+            font-weight: bold;
+        }
+
+        .message {
+            margin-top: 15px;
+            text-align: center;
+            font-weight: bold;
+            min-height: 20px;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="login-container">
+
+
+    <div class="logo">
+        🥛 MilkMate
+    </div>
+
+
+    <h1 class="title">
+        Farmer Login
+    </h1>
+
+
+    <p class="subtitle">
+        Login using your mobile number
+    </p>
+
+
+    <form id="farmerLoginForm">
+
+
+        <div class="form-group">
+
+            <label for="mobile">
+                Mobile Number
+            </label>
+
+            <input
+                type="tel"
+                id="mobile"
+                name="mobile"
+                placeholder="Enter 10 digit mobile number"
+                maxlength="10"
+                required
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="password">
+                Password
+            </label>
+
+            <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Enter password"
+                required
+            >
+
+        </div>
+
+
+        <button
+            type="submit"
+            class="login-btn"
+            id="loginBtn">
+
+            Login
+
+        </button>
+
+
+    </form>
+
+
+    <div
+        id="message"
+        class="message">
+    </div>
+
+
+    <a
+        href="index.html"
+        class="back-btn">
+
+        ← Back to Home
+
+    </a>
+
+
+</div>
+
+
+
+<script>
+
+
+document
+    .getElementById("farmerLoginForm")
+    .addEventListener("submit", async function(event) {
+
+
+        event.preventDefault();
+
+
+        const mobile =
+            document
+                .getElementById("mobile")
+                .value
+                .trim();
+
+
+        const password =
+            document
+                .getElementById("password")
+                .value
+                .trim();
+
+
+        const message =
+            document.getElementById("message");
+
+
+        const loginBtn =
+            document.getElementById("loginBtn");
+
+
+
+        /* ========================================= */
+        /* VALIDATION */
+        /* ========================================= */
+
+
+        if (mobile.length !== 10) {
+
+            message.style.color = "red";
+
+            message.innerText =
+                "Please enter valid 10 digit mobile number";
+
+            return;
+        }
+
+
+        if (password.length === 0) {
+
+            message.style.color = "red";
+
+            message.innerText =
+                "Please enter password";
+
+            return;
+        }
+
+
+
+        /* ========================================= */
+        /* SHOW LOGIN PROCESS */
+        /* ========================================= */
+
+
+        loginBtn.disabled = true;
+
+        loginBtn.innerText =
+            "Logging in...";
+
+
+        message.style.color =
+            "#2563eb";
+
+        message.innerText =
+            "Please wait...";
+
+
+
+        try {
+
+
+            /* ===================================== */
+            /* CALL SPRING BOOT LOGIN API */
+            /* ===================================== */
+
+
+            const response =
+                await fetch(
+                    "/api/auth/login",
+                    {
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json",
+
+                            "Accept":
+                                "application/json"
+                        },
+
+                        body: JSON.stringify({
+
+                            mobile: mobile,
+
+                            password: password
+
+                        })
+                    }
+                );
+
+
+
+            /* ===================================== */
+            /* GET RESPONSE */
+            /* ===================================== */
+
+
+            const data =
+                await response.json();
+
+
+            console.log(
+                "Login API Response:",
+                data
+            );
+
+
+
+            /* ===================================== */
+            /* LOGIN FAILED */
+            /* ===================================== */
+
+
+            if (!response.ok) {
+
+                message.style.color =
+                    "red";
+
+                message.innerText =
+                    data.message ||
+                    "Invalid mobile number or password";
+
+
+                loginBtn.disabled =
+                    false;
+
+                loginBtn.innerText =
+                    "Login";
+
+
+                return;
+            }
+
+
+
+            /* ===================================== */
+            /* TOKEN CHECK */
+            /* ===================================== */
+
+
+            if (!data.token) {
+
+                message.style.color =
+                    "red";
+
+                message.innerText =
+                    "Login successful but token was not received.";
+
+                console.error(
+                    "Token missing from API response:",
+                    data
+                );
+
+
+                loginBtn.disabled =
+                    false;
+
+                loginBtn.innerText =
+                    "Login";
+
+
+                return;
+            }
+
+
+
+            /* ===================================== */
+            /* SAVE LOGIN DATA */
+            /* ===================================== */
+
+
+            localStorage.setItem(
+                "token",
+                data.token
+            );
+
+
+            localStorage.setItem(
+                "mobile",
+                data.mobile || mobile
+            );
+
+
+            localStorage.setItem(
+                "farmerId",
+                data.farmerId || ""
+            );
+
+
+            localStorage.setItem(
+                "userId",
+                data.userId || ""
+            );
+
+
+            localStorage.setItem(
+                "userRole",
+                data.role || "FARMER"
+            );
+
+
+            localStorage.setItem(
+                "userName",
+                data.fullName || "Farmer"
+            );
+
+
+            localStorage.setItem(
+                "isLogin",
+                "true"
+            );
+
+
+
+            /* ===================================== */
+            /* SUCCESS */
+            /* ===================================== */
+
+
+            message.style.color =
+                "green";
+
+            message.innerText =
+                "Login successful. Opening dashboard...";
+
+
+            console.log(
+                "Token saved successfully."
+            );
+
+
+
+            /* ===================================== */
+            /* REDIRECT */
+            /* ===================================== */
+
+
+            setTimeout(
+                function() {
+
+                    window.location.href =
+                        "farmer-dashboard.html";
+
+                },
+                500
+            );
+
+
+        }
+
+
+        catch (error) {
+
+
+            console.error(
+                "Login Error:",
+                error
+            );
+
+
+            message.style.color =
+                "red";
+
+            message.innerText =
+                "Server error. Please make sure MilkMate is running.";
+
+
+            loginBtn.disabled =
+                false;
+
+            loginBtn.innerText =
+                "Login";
+
+        }
+
+    });
+
+
+</script>
+
+
+</body>
+
+</html>

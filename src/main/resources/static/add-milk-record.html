@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>MilkMate - Add Milk Record</title>
+
+    <link
+        rel="stylesheet"
+        href="/css/add-milk-record.css">
+
+</head>
+
+
+<body>
+
+
+<header class="header">
+
+    <div class="brand">
+
+        <span class="brand-icon">🥛</span>
+
+        <div>
+
+            <h1>MilkMate</h1>
+
+            <p>Farmer Management Portal</p>
+
+        </div>
+
+    </div>
+
+
+    <a
+        href="/farmer-dashboard.html"
+        class="back-btn">
+
+        ← Dashboard
+
+    </a>
+
+</header>
+
+
+
+<main class="container">
+
+    <div class="card">
+
+
+        <div class="page-heading">
+
+            <div class="heading-icon">
+                🥛
+            </div>
+
+            <div>
+
+                <h2>
+                    Add Milk Record
+                </h2>
+
+                <p>
+                    Record your daily milk collection
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="info-box">
+
+            <span>ℹ️</span>
+
+            <p>
+
+                Enter your daily milk collection details.
+                MilkMate automatically gets the applicable
+                milk rate and calculates the total amount.
+
+            </p>
+
+        </div>
+
+
+
+        <form id="milkRecordForm">
+
+
+            <div class="form-grid">
+
+
+                <div class="form-group">
+
+                    <label for="collectionDate">
+
+                        Collection Date
+                        <span>*</span>
+
+                    </label>
+
+                    <input
+                        type="date"
+                        id="collectionDate"
+                        required>
+
+                </div>
+
+
+
+                <div class="form-group">
+
+                    <label for="shift">
+
+                        Milk Session
+                        <span>*</span>
+
+                    </label>
+
+                    <select
+                        id="shift"
+                        required>
+
+                        <option value="">
+                            Select Session
+                        </option>
+
+                        <option value="MORNING">
+                            Morning
+                        </option>
+
+                        <option value="EVENING">
+                            Evening
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <div class="form-group">
+
+                    <label for="quantity">
+
+                        Milk Quantity (Liters)
+                        <span>*</span>
+
+                    </label>
+
+                    <input
+                        type="number"
+                        id="quantity"
+                        step="0.01"
+                        min="0.01"
+                        placeholder="Example: 12.50"
+                        required>
+
+                </div>
+
+
+
+                <div class="form-group">
+
+                    <label for="fat">
+
+                        Fat (%)
+                        <span>*</span>
+
+                    </label>
+
+                    <input
+                        type="number"
+                        id="fat"
+                        step="0.01"
+                        min="0.01"
+                        placeholder="Example: 4.50"
+                        required>
+
+                </div>
+
+
+
+                <div class="form-group">
+
+                    <label for="snf">
+
+                        SNF (%)
+                        <span>*</span>
+
+                    </label>
+
+                    <input
+                        type="number"
+                        id="snf"
+                        step="0.01"
+                        min="0.01"
+                        placeholder="Example: 8.50"
+                        required>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- AUTOMATIC CALCULATION -->
+
+            <div class="calculation-card">
+
+                <div class="calculation-header">
+
+                    <div>
+
+                        <h3>
+                            Automatic Calculation
+                        </h3>
+
+                        <p>
+                            Rate is fetched from MilkMate
+                            according to collection date.
+                        </p>
+
+                    </div>
+
+                    <div class="calculation-icon">
+                        ₹
+                    </div>
+
+                </div>
+
+
+                <div class="calculation-grid">
+
+
+                    <div class="calculation-item">
+
+                        <span>
+                            Milk Rate
+                        </span>
+
+                        <strong id="milkRate">
+                            --
+                        </strong>
+
+                    </div>
+
+
+                    <div class="calculation-item">
+
+                        <span>
+                            Estimated Total
+                        </span>
+
+                        <strong id="totalAmount">
+                            ₹0.00
+                        </strong>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+
+            <div
+                id="message"
+                class="message">
+            </div>
+
+
+
+            <div class="button-row">
+
+
+                <a
+                    href="/farmer-dashboard.html"
+                    class="cancel-btn">
+
+                    Cancel
+
+                </a>
+
+
+                <button
+                    type="submit"
+                    id="saveButton"
+                    class="save-btn">
+
+                    💾 Save Milk Record
+
+                </button>
+
+
+            </div>
+
+
+        </form>
+
+
+    </div>
+
+</main>
+
+
+
+<footer class="footer">
+
+    © 2026 MilkMate
+    <span>•</span>
+    Enterprise Dairy Milk Management System
+
+</footer>
+
+
+
+<script src="/js/add-milk-record.js"></script>
+
+</body>
+
+</html>

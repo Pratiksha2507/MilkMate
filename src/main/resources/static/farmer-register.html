@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>MilkMate - Farmer Registration</title>
+
+    <link rel="stylesheet"
+          href="/css/farmer-register.css">
+
+</head>
+
+<body>
+
+    <div class="register-container">
+
+        <div class="register-card">
+
+            <div class="logo-section">
+                <div class="logo">🥛</div>
+                <h1>MilkMate</h1>
+                <p class="subtitle">Farmer Registration</p>
+            </div>
+
+
+            <form id="registerForm">
+
+                <!-- Full Name -->
+                <div class="form-group">
+
+                    <label for="fullName">
+                        Full Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="fullName"
+                        placeholder="Enter your full name"
+                        autocomplete="name"
+                        required>
+
+                </div>
+
+
+                <!-- Mobile -->
+                <div class="form-group">
+
+                    <label for="mobile">
+                        Mobile Number
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="mobile"
+                        placeholder="Enter 10 digit mobile number"
+                        maxlength="10"
+                        inputmode="numeric"
+                        autocomplete="tel"
+                        required>
+
+                </div>
+
+
+                <!-- Email -->
+                <div class="form-group">
+
+                    <label for="email">
+                        Email Address
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="Enter email address"
+                        autocomplete="email"
+                        required>
+
+                </div>
+
+
+                <!-- Password -->
+                <div class="form-group">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="Create password"
+                        autocomplete="new-password"
+                        required>
+
+                </div>
+
+
+                <!-- Confirm Password -->
+                <div class="form-group">
+
+                    <label for="confirmPassword">
+                        Confirm Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="confirmPassword"
+                        placeholder="Confirm password"
+                        autocomplete="new-password"
+                        required>
+
+                </div>
+
+
+                <!-- Message -->
+                <div id="message"></div>
+
+
+                <!-- Register Button -->
+                <button
+                    type="submit"
+                    id="registerButton">
+
+                    Create Account
+
+                </button>
+
+            </form>
+
+
+            <div class="login-link">
+
+                Already have an account?
+
+                <a href="/farmer-login.html">
+                    Login
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script src="/js/farmer-register.js"></script>
+
+</body>
+
+</html>

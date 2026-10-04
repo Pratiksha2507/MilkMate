@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>MilkMate - Notifications</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f5f7fb;
+            color: #222;
+        }
+
+        /* BACK TO DASHBOARD */
+        .back-dashboard {
+            padding: 15px 30px;
+            background: #f5f7fb;
+        }
+
+        .back-dashboard a {
+            display: inline-block;
+            padding: 10px 18px;
+            background: #1f4e79;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .back-dashboard a:hover {
+            background: #163a5c;
+        }
+
+        .header {
+            background: #1f4e79;
+            color: white;
+            padding: 18px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            font-size: 24px;
+        }
+
+        .header span {
+            font-size: 14px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .top-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .top-section h2 {
+            color: #1f4e79;
+        }
+
+        button {
+            border: none;
+            padding: 11px 18px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .btn-read-all {
+            background: #1f4e79;
+            color: white;
+        }
+
+        .btn-read {
+            background: #e8f1fa;
+            color: #1f4e79;
+        }
+
+        .notification-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            border-left: 5px solid #1f4e79;
+        }
+
+        .notification-card.unread {
+            border-left-color: #e67e22;
+            background: #fffaf4;
+        }
+
+        .notification-header {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+        }
+
+        .notification-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #1f4e79;
+        }
+
+        .notification-message {
+            margin-top: 10px;
+            color: #555;
+            line-height: 1.5;
+        }
+
+        .notification-footer {
+            margin-top: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .notification-type {
+            font-size: 12px;
+            padding: 5px 9px;
+            border-radius: 15px;
+            background: #eee;
+        }
+
+        .notification-date {
+            font-size: 12px;
+            color: #888;
+        }
+
+        .empty {
+            text-align: center;
+            padding: 50px;
+            background: white;
+            border-radius: 10px;
+            color: #777;
+        }
+
+        .message {
+            margin-bottom: 15px;
+            padding: 12px;
+            border-radius: 6px;
+            display: none;
+        }
+
+        .success {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        @media (max-width: 600px) {
+
+            .header {
+                padding: 15px;
+            }
+
+            .back-dashboard {
+                padding: 15px;
+            }
+
+            .container {
+                margin-top: 20px;
+            }
+
+            .top-section {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+
+            .notification-header {
+                flex-direction: column;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <!-- BACK TO DASHBOARD -->
+    <div class="back-dashboard">
+        <a href="admin-dashboard.html">
+            ← Back to Dashboard
+        </a>
+    </div>
+
+    <!-- HEADER -->
+    <div class="header">
+
+        <h1>🥛 MilkMate</h1>
+
+        <span>Notifications</span>
+
+    </div>
+
+    <!-- MAIN CONTAINER -->
+    <div class="container">
+
+        <div class="top-section">
+
+            <h2>Notifications</h2>
+
+            <button
+                class="btn-read-all"
+                onclick="markAllAsRead()">
+
+                Mark All as Read
+
+            </button>
+
+        </div>
+
+        <div id="message" class="message"></div>
+
+        <div id="notificationList"></div>
+
+    </div>
+
+    <!-- JAVASCRIPT -->
+    <script src="/js/notifications.js"></script>
+
+</body>
+
+</html>

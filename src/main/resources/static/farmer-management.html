@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>MilkMate | Farmer Management</title>
+
+    <link rel="stylesheet"
+          href="css/style.css">
+
+</head>
+
+
+<body>
+
+<div class="dashboard-layout">
+<!-- BACK TO DASHBOARD -->
+<div style="padding: 15px 20px;">
+    <a href="admin-dashboard.html"
+       style="display:inline-block;
+              padding:10px 18px;
+              background:#1f4e79;
+              color:white;
+              text-decoration:none;
+              border-radius:6px;
+              font-weight:600;">
+        ← Back to Dashboard
+    </a>
+</div>
+
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="sidebar">
+
+        <div class="sidebar-logo">
+            🥛 <span>MilkMate</span>
+        </div>
+
+
+        <div class="sidebar-menu">
+
+            <a href="admin-dashboard.html"
+               class="menu-item">
+
+                📊 Dashboard
+
+            </a>
+
+
+            <a href="farmer-management.html"
+               class="menu-item active">
+
+                👨‍🌾 Farmers
+
+            </a>
+
+
+            <a href="milk-collection.html"
+               class="menu-item">
+
+                🥛 Milk Collection
+
+            </a>
+
+
+            <a href="milk-rates.html"
+               class="menu-item">
+
+                💰 Milk Rates
+
+            </a>
+
+
+            <a href="payments.html"
+               class="menu-item">
+
+                💳 Payments
+
+            </a>
+
+
+            <a href="monthly-accounts.html"
+               class="menu-item">
+
+                📅 Monthly Accounts
+
+            </a>
+
+
+            <a href="reports.html"
+               class="menu-item">
+
+                📈 Reports
+
+            </a>
+
+
+            <a href="notifications.html"
+               class="menu-item">
+
+                🔔 Notifications
+
+            </a>
+
+        </div>
+
+
+        <div class="sidebar-bottom">
+
+            <button onclick="logout()"
+                    class="logout-btn">
+
+                🚪 Logout
+
+            </button>
+
+        </div>
+
+    </aside>
+
+
+
+    <!-- ================= MAIN CONTENT ================= -->
+
+    <main class="main-content">
+
+
+        <!-- ================= TOPBAR ================= -->
+
+        <header class="topbar">
+
+            <div>
+
+                <h1>
+                    Farmer Management
+                </h1>
+
+                <p>
+                    Manage registered dairy farmers
+                </p>
+
+            </div>
+
+
+            <div class="admin-profile">
+
+                <div class="profile-icon">
+                    👤
+                </div>
+
+                <div>
+
+                    <strong id="adminName">
+                        Admin
+                    </strong>
+
+                    <small>
+                        Administrator
+                    </small>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- ================= ADD FARMER ================= -->
+
+        <section class="dashboard-section">
+
+
+            <div class="section-header">
+
+                <div>
+
+                    <h2>
+                        Add New Farmer
+                    </h2>
+
+                    <p>
+                        Enter farmer details below
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <form id="farmerForm">
+
+
+                <div class="farmer-form-grid">
+
+
+                    <!-- FARMER CODE -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Farmer Code
+                        </label>
+
+                        <input
+                            type="text"
+                            id="farmerCode"
+                            placeholder="Example: F004"
+                            required>
+
+                    </div>
+
+
+
+                    <!-- FULL NAME -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Full Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="fullName"
+                            placeholder="Enter farmer name"
+                            required>
+
+                    </div>
+
+
+
+                    <!-- MOBILE -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Mobile Number
+                        </label>
+
+                        <input
+                            type="text"
+                            id="mobile"
+                            placeholder="Enter mobile number"
+                            maxlength="15"
+                            required>
+
+                    </div>
+
+
+
+                    <!-- VILLAGE -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Village
+                        </label>
+
+                        <input
+                            type="text"
+                            id="village"
+                            placeholder="Enter village">
+
+                    </div>
+
+
+
+                    <!-- ADDRESS -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Address
+                        </label>
+
+                        <input
+                            type="text"
+                            id="address"
+                            placeholder="Enter address">
+
+                    </div>
+
+
+                </div>
+
+
+
+                <button
+                    type="submit"
+                    class="login-btn farmer-submit-btn">
+
+                    ➕ Add Farmer
+
+                </button>
+
+
+            </form>
+
+
+            <p id="farmerMessage"></p>
+
+
+        </section>
+
+
+
+        <!-- ================= EDIT FARMER ================= -->
+
+        <section
+            class="dashboard-section"
+            id="editFarmerSection"
+            style="display: none;">
+
+
+            <div class="section-header">
+
+                <div>
+
+                    <h2>
+                        Edit Farmer
+                    </h2>
+
+                    <p>
+                        Update farmer information
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <form id="editFarmerForm">
+
+
+                <input
+                    type="hidden"
+                    id="editFarmerId">
+
+
+
+                <div class="farmer-form-grid">
+
+
+                    <!-- FARMER CODE -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Farmer Code
+                        </label>
+
+                        <input
+                            type="text"
+                            id="editFarmerCode"
+                            required>
+
+                    </div>
+
+
+
+                    <!-- FULL NAME -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Full Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="editFullName"
+                            required>
+
+                    </div>
+
+
+
+                    <!-- MOBILE -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Mobile Number
+                        </label>
+
+                        <input
+                            type="text"
+                            id="editMobile"
+                            maxlength="15"
+                            required>
+
+                    </div>
+
+
+
+                    <!-- VILLAGE -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Village
+                        </label>
+
+                        <input
+                            type="text"
+                            id="editVillage">
+
+                    </div>
+
+
+
+                    <!-- ADDRESS -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Address
+                        </label>
+
+                        <input
+                            type="text"
+                            id="editAddress">
+
+                    </div>
+
+
+
+                    <!-- STATUS -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Status
+                        </label>
+
+                        <select id="editActive">
+
+                            <option value="true">
+                                Active
+                            </option>
+
+                            <option value="false">
+                                Inactive
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <button
+                    type="submit"
+                    class="login-btn farmer-submit-btn">
+
+                    💾 Update Farmer
+
+                </button>
+
+
+
+                <button
+                    type="button"
+                    class="action-btn delete-btn"
+                    onclick="cancelEdit()">
+
+                    Cancel
+
+                </button>
+
+
+            </form>
+
+
+            <p id="editFarmerMessage"></p>
+
+
+        </section>
+
+
+
+        <!-- ================= FARMER LIST ================= -->
+
+        <section
+            class="dashboard-section farmer-list-section">
+
+
+            <div class="section-header">
+
+                <div>
+
+                    <h2>
+                        Registered Farmers
+                    </h2>
+
+                    <p>
+                        All farmers registered in MilkMate
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="table-container">
+
+
+                <table class="farmer-table">
+
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                ID
+                            </th>
+
+                            <th>
+                                Code
+                            </th>
+
+                            <th>
+                                Name
+                            </th>
+
+                            <th>
+                                Mobile
+                            </th>
+
+                            <th>
+                                Village
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                            <th>
+                                Action
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+
+                    <tbody id="farmerTableBody">
+
+                        <tr>
+
+                            <td colspan="7">
+
+                                Loading farmers...
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+
+                </table>
+
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+</div>
+
+
+
+<script src="js/farmer-management.js"></script>
+
+
+</body>
+
+</html>

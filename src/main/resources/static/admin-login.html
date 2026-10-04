@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>MilkMate | Admin Login</title>
+
+    <link
+        rel="stylesheet"
+        href="/css/admin-login.css">
+
+</head>
+
+<body>
+
+    <div class="page">
+
+        <!-- Left Branding Section -->
+        <div class="brand-section">
+
+            <div class="brand-content">
+
+                <div class="logo">
+                    🥛
+                </div>
+
+                <h1>MilkMate</h1>
+
+                <h2>Smart Dairy Management</h2>
+
+                <p>
+                    Manage farmers, milk collection,
+                    payments, rates and reports
+                    from one professional platform.
+                </p>
+
+                <div class="brand-points">
+
+                    <div>
+                        ✓ Farmer Management
+                    </div>
+
+                    <div>
+                        ✓ Milk Collection
+                    </div>
+
+                    <div>
+                        ✓ Payments & Reports
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Login Section -->
+        <div class="login-section">
+
+            <div class="login-card">
+
+                <div class="mobile-logo">
+                    🥛
+                </div>
+
+                <h3>Welcome Back</h3>
+
+                <p class="login-subtitle">
+                    Sign in to your administrator account
+                </p>
+
+
+                <form
+                    id="adminLoginForm"
+                    onsubmit="loginAdmin(); return false;"
+                >
+
+                    <!-- Mobile -->
+                    <div class="form-group">
+
+                        <label for="mobile">
+                            Mobile Number
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <span class="input-icon">
+                                ☎
+                            </span>
+
+                            <input
+                                type="text"
+                                id="mobile"
+                                placeholder="Enter mobile number"
+                                maxlength="10"
+                                autocomplete="tel"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Password -->
+                    <div class="form-group">
+
+                        <div class="label-row">
+
+                            <label for="password">
+                                Password
+                            </label>
+
+                        </div>
+
+                        <div class="input-wrapper">
+
+                            <span class="input-icon">
+                                🔒
+                            </span>
+
+                            <input
+                                type="password"
+                                id="password"
+                                placeholder="Enter your password"
+                                autocomplete="current-password"
+                                required
+                            >
+
+                            <button
+                                type="button"
+                                class="show-password"
+                                onclick="togglePassword()">
+
+                                👁
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Login Button -->
+                    <button
+                        type="submit"
+                        id="loginButton"
+                        class="login-btn">
+
+                        <span>Login</span>
+
+                        <span class="arrow">
+                            →
+                        </span>
+
+                    </button>
+
+
+                    <!-- Message -->
+                    <div
+                        id="message"
+                        class="message">
+                    </div>
+
+                </form>
+
+
+                <div class="security-note">
+
+                    🔐 Secure administrator access
+
+                </div>
+
+
+                <div class="footer-text">
+
+                    © 2026 MilkMate.
+                    All rights reserved.
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script src="/js/admin-login.js"></script>
+
+
+    <script>
+
+        function togglePassword() {
+
+            const password =
+                document.getElementById(
+                    "password"
+                );
+
+            const button =
+                document.querySelector(
+                    ".show-password"
+                );
+
+
+            if (
+                password.type === "password"
+            ) {
+
+                password.type =
+                    "text";
+
+                button.textContent =
+                    "🙈";
+
+            } else {
+
+                password.type =
+                    "password";
+
+                button.textContent =
+                    "👁";
+            }
+        }
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>MilkMate - Reports</title>
+
+    <link rel="stylesheet"
+          href="/css/style.css">
+
+
+    <style>
+
+        body {
+            background: #f5f7fb;
+        }
+
+
+        /* ================= BACK TO DASHBOARD ================= */
+
+        .back-dashboard {
+            padding: 15px 20px;
+            background: #f5f7fb;
+        }
+
+        .back-dashboard a {
+            display: inline-block;
+            padding: 10px 18px;
+            background: #1f4e79;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+        }
+
+        .back-dashboard a:hover {
+            background: #163a5c;
+        }
+
+
+        .report-container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 20px;
+        }
+
+
+        .report-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+
+        .report-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #1f2937;
+        }
+
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+
+        .form-group label {
+            font-weight: 600;
+            margin-bottom: 7px;
+            color: #344054;
+        }
+
+
+        .form-group select,
+        .form-group input {
+            padding: 11px;
+            border: 1px solid #d0d5dd;
+            border-radius: 7px;
+            font-size: 15px;
+            outline: none;
+        }
+
+
+        .form-group select:focus,
+        .form-group input:focus {
+            border-color: #2563eb;
+        }
+
+
+        .btn-generate {
+            margin-top: 24px;
+            padding: 12px 22px;
+            border: none;
+            border-radius: 7px;
+            background: #2563eb;
+            color: white;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+
+        .btn-generate:hover {
+            background: #1d4ed8;
+        }
+
+
+        .message {
+            margin-top: 15px;
+            font-weight: 600;
+        }
+
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+        }
+
+
+        .summary-box {
+            padding: 20px;
+            border-radius: 10px;
+            background: #f8fafc;
+            border: 1px solid #e4e7ec;
+        }
+
+
+        .summary-label {
+            font-size: 14px;
+            color: #667085;
+            margin-bottom: 8px;
+        }
+
+
+        .summary-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: #111827;
+        }
+
+
+        .farmer-info {
+            line-height: 1.9;
+            color: #344054;
+        }
+
+
+        .hidden {
+            display: none;
+        }
+
+
+        @media (max-width: 800px) {
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .summary-grid {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ================= BACK TO DASHBOARD ================= -->
+
+<div class="back-dashboard">
+
+    <a href="admin-dashboard.html">
+        ← Back to Dashboard
+    </a>
+
+</div>
+
+
+
+<!-- ================= REPORT CONTAINER ================= -->
+
+<div class="report-container">
+
+
+    <!-- ================= REPORT FILTER ================= -->
+
+    <div class="report-card">
+
+
+        <div class="report-title">
+
+            📊 Farmer Milk Report
+
+        </div>
+
+
+
+        <div class="form-grid">
+
+
+            <!-- FARMER -->
+
+            <div class="form-group">
+
+                <label for="farmerId">
+                    Select Farmer
+                </label>
+
+
+                <select id="farmerId">
+
+                    <option value="">
+                        Select Farmer
+                    </option>
+
+                </select>
+
+            </div>
+
+
+
+            <!-- START DATE -->
+
+            <div class="form-group">
+
+                <label for="startDate">
+                    Start Date
+                </label>
+
+
+                <input
+                    type="date"
+                    id="startDate">
+
+            </div>
+
+
+
+            <!-- END DATE -->
+
+            <div class="form-group">
+
+                <label for="endDate">
+                    End Date
+                </label>
+
+
+                <input
+                    type="date"
+                    id="endDate">
+
+            </div>
+
+        </div>
+
+
+
+        <!-- GENERATE REPORT -->
+
+        <button
+            type="button"
+            class="btn-generate"
+            onclick="generateReport()">
+
+            Generate Report
+
+        </button>
+
+
+
+        <!-- PRINT / PDF -->
+
+        <button
+            type="button"
+            class="btn-generate"
+            onclick="printReport()">
+
+            🖨️ Print / Save PDF
+
+        </button>
+
+
+
+        <div
+            id="message"
+            class="message">
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ================= REPORT RESULT ================= -->
+
+    <div
+        id="reportResult"
+        class="hidden">
+
+
+
+        <!-- ================= FARMER DETAILS ================= -->
+
+        <div class="report-card">
+
+
+            <div class="report-title">
+
+                👨‍🌾 Farmer Details
+
+            </div>
+
+
+            <div
+                id="farmerInfo"
+                class="farmer-info">
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ================= MILK SUMMARY ================= -->
+
+        <div class="report-card">
+
+
+            <div class="report-title">
+
+                🥛 Milk Summary
+
+            </div>
+
+
+
+            <div class="summary-grid">
+
+
+                <!-- TOTAL MILK -->
+
+                <div class="summary-box">
+
+                    <div class="summary-label">
+
+                        Total Milk
+
+                    </div>
+
+
+                    <div
+                        id="totalMilk"
+                        class="summary-value">
+
+                        0.00 L
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- TOTAL AMOUNT -->
+
+                <div class="summary-box">
+
+                    <div class="summary-label">
+
+                        Total Amount
+
+                    </div>
+
+
+                    <div
+                        id="totalAmount"
+                        class="summary-value">
+
+                        ₹0.00
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- MORNING -->
+
+                <div class="summary-box">
+
+                    <div class="summary-label">
+
+                        Morning Milk
+
+                    </div>
+
+
+                    <div
+                        id="morningMilk"
+                        class="summary-value">
+
+                        0.00 L
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- EVENING -->
+
+                <div class="summary-box">
+
+                    <div class="summary-label">
+
+                        Evening Milk
+
+                    </div>
+
+
+                    <div
+                        id="eveningMilk"
+                        class="summary-value">
+
+                        0.00 L
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ================= COLLECTION SUMMARY ================= -->
+
+        <div class="report-card">
+
+
+            <div class="report-title">
+
+                📋 Collection Summary
+
+            </div>
+
+
+            <div class="summary-box">
+
+
+                <div class="summary-label">
+
+                    Total Collections
+
+                </div>
+
+
+                <div
+                    id="totalCollections"
+                    class="summary-value">
+
+                    0
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+
+<!-- ================= JAVASCRIPT ================= -->
+
+<script src="/js/reports.js"></script>
+
+
+</body>
+
+</html>

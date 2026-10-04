@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+```
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>MilkMate - Admin Dashboard</title>
+
+<link rel="stylesheet"
+      href="css/admin-dashboard.css">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+```
+
+</head>
+
+<body>
+
+<div class="dashboard-container">
+
+```
+<!-- ================= SIDEBAR ================= -->
+
+<aside class="sidebar">
+
+    <div class="logo">
+        <h2>MilkMate</h2>
+        <p>Admin Panel</p>
+    </div>
+
+    <nav class="sidebar-menu">
+
+        <a href="admin-dashboard.html" class="active">
+            🏠 Dashboard
+        </a>
+
+        <a href="farmer-management.html">
+            👨‍🌾 Farmers
+        </a>
+
+        <a href="milk-collection.html">
+            🥛 Milk Collection
+        </a>
+
+        <a href="milk-rates.html">
+            💰 Milk Rates
+        </a>
+
+        <a href="payments.html">
+            💳 Payments
+        </a>
+
+        <a href="monthly-accounts.html">
+            📊 Monthly Accounts
+        </a>
+
+        <a href="reports.html">
+            📄 Reports
+        </a>
+
+        <a href="notifications.html">
+            🔔 Notifications
+        </a>
+
+    </nav>
+
+    <button id="logoutBtn" class="logout-btn">
+        Logout
+    </button>
+
+</aside>
+
+
+<!-- ================= MAIN CONTENT ================= -->
+
+<main class="main-content">
+
+
+    <!-- ================= TOP BAR ================= -->
+
+    <header class="topbar">
+
+        <div>
+
+            <h1>Admin Dashboard</h1>
+
+            <p>
+                MilkMate Dairy Management System
+            </p>
+
+        </div>
+
+        <div class="admin-info">
+
+            <span>
+                👤 Administrator
+            </span>
+
+        </div>
+
+    </header>
+
+
+    <!-- ================= WELCOME ================= -->
+
+    <section class="welcome-section">
+
+        <h2>
+            Welcome to MilkMate 👋
+        </h2>
+
+        <p>
+            Manage farmers, milk collection, payments
+            and dairy operations from one place.
+        </p>
+
+    </section>
+
+
+    <!-- ================= MAIN DASHBOARD CARDS ================= -->
+
+    <section class="stats-grid">
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                👨‍🌾
+            </div>
+
+            <div>
+
+                <h3>
+                    Total Farmers
+                </h3>
+
+                <p id="totalFarmers">
+                    0
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                ✅
+            </div>
+
+            <div>
+
+                <h3>
+                    Active Farmers
+                </h3>
+
+                <p id="activeFarmers">
+                    0
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                🥛
+            </div>
+
+            <div>
+
+                <h3>
+                    Today's Milk
+                </h3>
+
+                <p>
+
+                    <span id="todayMilk">
+                        0
+                    </span>
+
+                    L
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                💰
+            </div>
+
+            <div>
+
+                <h3>
+                    Today's Collection
+                </h3>
+
+                <p>
+
+                    ₹<span id="todayCollectionAmount">
+                        0
+                    </span>
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                🌅
+            </div>
+
+            <div>
+
+                <h3>
+                    Morning Milk
+                </h3>
+
+                <p>
+
+                    <span id="morningMilk">
+                        0
+                    </span>
+
+                    L
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                🌙
+            </div>
+
+            <div>
+
+                <h3>
+                    Evening Milk
+                </h3>
+
+                <p>
+
+                    <span id="eveningMilk">
+                        0
+                    </span>
+
+                    L
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                💳
+            </div>
+
+            <div>
+
+                <h3>
+                    Total Paid
+                </h3>
+
+                <p>
+
+                    ₹<span id="totalPaid">
+                        0
+                    </span>
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                ⚠️
+            </div>
+
+            <div>
+
+                <h3>
+                    Pending Amount
+                </h3>
+
+                <p>
+
+                    ₹<span id="pendingAmount">
+                        0
+                    </span>
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+    <!-- ================= QUICK ACTIONS ================= -->
+
+    <section class="dashboard-section">
+
+        <div class="section-header">
+
+            <h2>
+                Quick Actions
+            </h2>
+
+        </div>
+
+
+        <div class="quick-actions">
+
+            <a href="farmer-management.html"
+               class="quick-btn">
+
+                👨‍🌾 Add Farmer
+
+            </a>
+
+
+            <a href="milk-collection.html"
+               class="quick-btn">
+
+                🥛 Record Milk
+
+            </a>
+
+
+            <a href="payments.html"
+               class="quick-btn">
+
+                💳 Add Payment
+
+            </a>
+
+
+            <a href="reports.html"
+               class="quick-btn">
+
+                📄 Generate Report
+
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= RECENT MILK COLLECTIONS ================= -->
+
+    <section class="dashboard-section">
+
+        <div class="section-header">
+
+            <div>
+
+                <h2>
+                    Recent Milk Collections
+                </h2>
+
+                <p>
+                    Latest recorded milk collections
+                </p>
+
+            </div>
+
+
+            <a href="milk-collection.html"
+               class="view-all">
+
+                View All
+
+            </a>
+
+        </div>
+
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Date</th>
+
+                        <th>Farmer</th>
+
+                        <th>Session</th>
+
+                        <th>Milk</th>
+
+                        <th>Fat</th>
+
+                        <th>SNF</th>
+
+                        <th>Rate</th>
+
+                        <th>Amount</th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="recentCollectionsBody">
+
+                    <tr>
+
+                        <td colspan="8">
+
+                            Loading...
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= OVERALL ANALYTICS ================= -->
+
+    <section class="dashboard-section">
+
+        <div class="section-header">
+
+            <div>
+
+                <h2>
+                    Milk Collection Analytics
+                </h2>
+
+                <p>
+                    Overall milk collection summary
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="analytics-grid">
+
+
+            <div class="analytics-card">
+
+                <h3>
+                    Total Milk
+                </h3>
+
+                <p>
+
+                    <span id="analyticsTotalMilk">
+                        0
+                    </span>
+
+                    L
+
+                </p>
+
+            </div>
+
+
+            <div class="analytics-card">
+
+                <h3>
+                    Morning Milk
+                </h3>
+
+                <p>
+
+                    <span id="analyticsMorningMilk">
+                        0
+                    </span>
+
+                    L
+
+                </p>
+
+            </div>
+
+
+            <div class="analytics-card">
+
+                <h3>
+                    Evening Milk
+                </h3>
+
+                <p>
+
+                    <span id="analyticsEveningMilk">
+                        0
+                    </span>
+
+                    L
+
+                </p>
+
+            </div>
+
+
+            <div class="analytics-card">
+
+                <h3>
+                    Total Amount
+                </h3>
+
+                <p>
+
+                    ₹<span id="analyticsTotalAmount">
+                        0
+                    </span>
+
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- CHART -->
+
+        <div class="chart-container">
+
+            <h3>
+                Morning vs Evening Milk
+            </h3>
+
+            <canvas id="milkCollectionChart">
+            </canvas>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= FARMER-WISE ANALYTICS ================= -->
+
+    <section class="dashboard-section">
+
+        <div class="section-header">
+
+            <div>
+
+                <h2>
+                    Farmer-wise Analytics
+                </h2>
+
+                <p>
+                    Overall recorded milk collection by farmer
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Farmer</th>
+
+                        <th>Total Milk</th>
+
+                        <th>Morning Milk</th>
+
+                        <th>Evening Milk</th>
+
+                        <th>Total Amount</th>
+
+                        <th>Collections</th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="farmerAnalyticsBody">
+
+                    <tr>
+
+                        <td colspan="6">
+
+                            Loading farmer analytics...
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= DATE-WISE ANALYTICS ================= -->
+
+    <section class="dashboard-section">
+
+        <div class="section-header">
+
+            <div>
+
+                <h2>
+                    Date-wise Analytics
+                </h2>
+
+                <p>
+                    Analyze milk collection between selected dates
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- DATE FILTER -->
+
+        <div class="date-filter-grid">
+
+
+            <div class="filter-group">
+
+                <label for="analyticsStartDate">
+                    Start Date
+                </label>
+
+                <input
+                    type="date"
+                    id="analyticsStartDate">
+
+            </div>
+
+
+            <div class="filter-group">
+
+                <label for="analyticsEndDate">
+                    End Date
+                </label>
+
+                <input
+                    type="date"
+                    id="analyticsEndDate">
+
+            </div>
+
+
+            <button
+                id="generateDateAnalyticsBtn">
+
+                Generate Analytics
+
+            </button>
+
+
+        </div>
+
+
+        <!-- MESSAGE -->
+
+        <p id="dateAnalyticsMessage">
+        </p>
+
+
+        <!-- DATE ANALYTICS CARDS -->
+
+        <div class="analytics-grid">
+
+
+            <div class="analytics-card">
+
+                <h3>
+                    Total Milk
+                </h3>
+
+                <p>
+
+                    <span id="dateTotalMilk">
+                        0
+                    </span>
+
+                    L
+
+                </p>
+
+            </div>
+
+
+            <div class="analytics-card">
+
+                <h3>
+                    Morning Milk
+                </h3>
+
+                <p>
+
+                    <span id="dateMorningMilk">
+                        0
+                    </span>
+
+                    L
+
+                </p>
+
+            </div>
+
+
+            <div class="analytics-card">
+
+                <h3>
+                    Evening Milk
+                </h3>
+
+                <p>
+
+                    <span id="dateEveningMilk">
+                        0
+                    </span>
+
+                    L
+
+                </p>
+
+            </div>
+
+
+            <div class="analytics-card">
+
+                <h3>
+                    Total Amount
+                </h3>
+
+                <p>
+
+                    ₹<span id="dateTotalAmount">
+                        0
+                    </span>
+
+                </p>
+
+            </div>
+
+
+            <div class="analytics-card">
+
+                <h3>
+                    Total Collections
+                </h3>
+
+                <p>
+
+                    <span id="dateTotalCollections">
+                        0
+                    </span>
+
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- DATE RANGE CHART -->
+
+        <div class="chart-container">
+
+            <h3>
+                Date Range Milk Summary
+            </h3>
+
+            <canvas id="dateAnalyticsChart">
+            </canvas>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <p>
+
+            © 2026 MilkMate -
+            Enterprise Dairy Milk Management System
+
+        </p>
+
+    </footer>
+
+
+</main>
+```
+
+</div>
+
+<!-- ================= JAVASCRIPT ================= -->
+
+<script src="js/admin-dashboard.js">
+</script>
+
+</body>
+
+</html>

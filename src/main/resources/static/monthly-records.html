@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Monthly Records - MilkMate</title>
+
+    <style>
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f5f7f6;
+        }
+
+        .header {
+            background: #176b3a;
+            color: white;
+            padding: 18px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h2 {
+            margin: 0;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+        }
+
+        .summary {
+            display: grid;
+            grid-template-columns:
+                repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .summary-card {
+            background: #f7faf8;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .summary-card p {
+            margin: 5px 0;
+        }
+
+        .value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #176b3a;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        th,
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background: #f0f5f2;
+        }
+
+        .back {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #176b3a;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .message {
+            padding: 15px;
+            color: #d92d20;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<header class="header">
+
+    <h2>MilkMate - Monthly Records</h2>
+
+    <button
+        onclick="logout()"
+        style="
+            padding:9px 16px;
+            border:none;
+            border-radius:6px;
+            cursor:pointer;
+        ">
+
+        Logout
+
+    </button>
+
+</header>
+
+
+<div class="container">
+
+    <a
+        href="/farmer-dashboard.html"
+        class="back">
+
+        ← Back to Dashboard
+
+    </a>
+
+
+    <div class="card">
+
+        <h2>My Monthly Summary</h2>
+
+        <div class="summary">
+
+            <div class="summary-card">
+
+                <p>Total Milk</p>
+
+                <p
+                    class="value"
+                    id="totalMilk">
+
+                    0 L
+
+                </p>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <p>Total Amount</p>
+
+                <p
+                    class="value"
+                    id="totalAmount">
+
+                    ₹0.00
+
+                </p>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <p>Total Paid</p>
+
+                <p
+                    class="value"
+                    id="totalPaid">
+
+                    ₹0.00
+
+                </p>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <p>Pending Amount</p>
+
+                <p
+                    class="value"
+                    id="pendingAmount">
+
+                    ₹0.00
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <h2>Monthly Milk Records</h2>
+
+        <div id="message"
+             class="message">
+        </div>
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>Date</th>
+
+                    <th>Session</th>
+
+                    <th>Quantity</th>
+
+                    <th>Fat</th>
+
+                    <th>SNF</th>
+
+                    <th>Rate</th>
+
+                    <th>Amount</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody id="recordsBody">
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+
+<script src="/js/monthly-records.js"></script>
+
+</body>
+
+</html>

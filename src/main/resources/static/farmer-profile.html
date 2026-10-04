@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>My Profile - MilkMate</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f7f5;
+            color: #222;
+        }
+
+        .header {
+            background: #176b3a;
+            color: white;
+            padding: 18px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 23px;
+        }
+
+        .logout-btn {
+            border: none;
+            background: white;
+            color: #176b3a;
+            padding: 9px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 35px auto;
+            padding: 0 20px;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #176b3a;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .profile-card {
+            background: white;
+            border-radius: 14px;
+            padding: 30px;
+            box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+        }
+
+        .profile-top {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .profile-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: #e8f3ec;
+            color: #176b3a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-size: 38px;
+        }
+
+        .profile-top h2 {
+            margin: 0;
+            color: #176b3a;
+        }
+
+        .profile-top p {
+            margin-top: 8px;
+            color: #667085;
+        }
+
+        .profile-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+        }
+
+        .profile-item {
+            border: 1px solid #e5e7eb;
+            border-radius: 10px;
+            padding: 16px;
+            background: #fafbfa;
+        }
+
+        .label {
+            font-size: 12px;
+            color: #667085;
+            margin-bottom: 7px;
+        }
+
+        .value {
+            font-size: 16px;
+            font-weight: 600;
+            color: #222;
+            word-break: break-word;
+        }
+
+        .actions {
+            margin-top: 25px;
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .action-btn {
+            text-decoration: none;
+            display: inline-block;
+            padding: 11px 18px;
+            border-radius: 7px;
+            background: #176b3a;
+            color: white;
+            font-weight: 600;
+        }
+
+        .message {
+            margin-top: 15px;
+            color: #d92d20;
+        }
+
+        @media (max-width: 650px) {
+
+            .profile-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header {
+                padding: 15px;
+            }
+
+            .header h1 {
+                font-size: 18px;
+            }
+
+            .container {
+                margin-top: 20px;
+            }
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<header class="header">
+
+    <h1>MilkMate - My Profile</h1>
+
+    <button
+        type="button"
+        class="logout-btn"
+        id="logoutBtn">
+
+        Logout
+
+    </button>
+
+</header>
+
+
+<main class="container">
+
+    <a
+        href="/farmer-dashboard.html"
+        class="back-link">
+
+        ← Back to Dashboard
+
+    </a>
+
+
+    <section class="profile-card">
+
+        <div class="profile-top">
+
+            <div class="profile-icon">
+                👤
+            </div>
+
+            <h2 id="profileName">
+                Farmer
+            </h2>
+
+            <p>
+                Farmer Account
+            </p>
+
+        </div>
+
+
+        <div class="profile-grid">
+
+            <div class="profile-item">
+
+                <div class="label">
+                    Full Name
+                </div>
+
+                <div
+                    class="value"
+                    id="fullName">
+                    -
+                </div>
+
+            </div>
+
+
+            <div class="profile-item">
+
+                <div class="label">
+                    Mobile Number
+                </div>
+
+                <div
+                    class="value"
+                    id="mobile">
+                    -
+                </div>
+
+            </div>
+
+
+            <div class="profile-item">
+
+                <div class="label">
+                    Email
+                </div>
+
+                <div
+                    class="value"
+                    id="email">
+                    -
+                </div>
+
+            </div>
+
+
+            <div class="profile-item">
+
+                <div class="label">
+                    Farmer ID
+                </div>
+
+                <div
+                    class="value"
+                    id="farmerId">
+                    -
+                </div>
+
+            </div>
+
+
+            <div class="profile-item">
+
+                <div class="label">
+                    User ID
+                </div>
+
+                <div
+                    class="value"
+                    id="userId">
+                    -
+                </div>
+
+            </div>
+
+
+            <div class="profile-item">
+
+                <div class="label">
+                    Role
+                </div>
+
+                <div
+                    class="value"
+                    id="role">
+                    FARMER
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div
+            id="message"
+            class="message">
+        </div>
+
+
+        <div class="actions">
+
+            <a
+                href="/farmer-dashboard.html"
+                class="action-btn">
+
+                Dashboard
+
+            </a>
+
+
+            <a
+                href="/add-milk-record.html"
+                class="action-btn">
+
+                Add Milk Record
+
+            </a>
+
+
+            <a
+                href="/my-payments.html"
+                class="action-btn">
+
+                My Payments
+
+            </a>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<script src="/js/farmer-profile.js"></script>
+
+</body>
+
+</html>

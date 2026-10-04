@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MilkMate | Payments</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<!-- ================= BACK TO DASHBOARD ================= -->
+
+<div style="padding: 15px 20px; background: #f5f7fb;">
+    <a href="admin-dashboard.html"
+       style="display:inline-block;
+              padding:10px 18px;
+              background:#1f4e79;
+              color:white;
+              text-decoration:none;
+              border-radius:6px;
+              font-weight:600;">
+        ← Back to Dashboard
+    </a>
+</div>
+
+
+<!-- ================= DASHBOARD LAYOUT ================= -->
+
+<div class="dashboard-layout">
+
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="sidebar">
+
+        <div class="sidebar-logo">
+            🥛 <span>MilkMate</span>
+        </div>
+
+
+        <div class="sidebar-menu">
+
+            <a href="admin-dashboard.html"
+               class="menu-item">
+                📊 Dashboard
+            </a>
+
+            <a href="farmer-management.html"
+               class="menu-item">
+                👨‍🌾 Farmers
+            </a>
+
+            <a href="milk-collection.html"
+               class="menu-item">
+                🥛 Milk Collection
+            </a>
+
+            <a href="milk-rates.html"
+               class="menu-item">
+                💰 Milk Rates
+            </a>
+
+            <a href="payments.html"
+               class="menu-item active">
+                💳 Payments
+            </a>
+
+            <a href="monthly-accounts.html"
+               class="menu-item">
+                📅 Monthly Accounts
+            </a>
+
+            <a href="reports.html"
+               class="menu-item">
+                📈 Reports
+            </a>
+
+            <a href="notifications.html"
+               class="menu-item">
+                🔔 Notifications
+            </a>
+
+        </div>
+
+
+        <div class="sidebar-bottom">
+
+            <button
+                onclick="logout()"
+                class="logout-btn">
+                🚪 Logout
+            </button>
+
+        </div>
+
+    </aside>
+
+
+
+    <!-- ================= MAIN CONTENT ================= -->
+
+    <main class="main-content">
+
+
+        <!-- ================= TOPBAR ================= -->
+
+        <header class="topbar">
+
+            <div>
+
+                <h1>Payments</h1>
+
+                <p>
+                    Manage farmer payments and transactions
+                </p>
+
+            </div>
+
+
+            <div class="admin-profile">
+
+                <div class="profile-icon">
+                    👤
+                </div>
+
+                <div>
+
+                    <strong id="adminName">
+                        Admin
+                    </strong>
+
+                    <small>
+                        Administrator
+                    </small>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- ================= ADD PAYMENT ================= -->
+
+        <section class="dashboard-section">
+
+            <div class="section-header">
+
+                <div>
+
+                    <h2>
+                        Record Farmer Payment
+                    </h2>
+
+                    <p>
+                        Enter payment transaction details
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <form id="paymentForm">
+
+                <div class="farmer-form-grid">
+
+
+                    <!-- FARMER -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Farmer
+                        </label>
+
+                        <select
+                            id="farmerId"
+                            required>
+
+                            <option value="">
+                                Select Farmer
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <!-- PAYMENT DATE -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Payment Date
+                        </label>
+
+                        <input
+                            type="date"
+                            id="paymentDate"
+                            required>
+
+                    </div>
+
+
+
+                    <!-- AMOUNT -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Payment Amount (₹)
+                        </label>
+
+                        <input
+                            type="number"
+                            id="amount"
+                            placeholder="Example: 5000"
+                            step="0.01"
+                            min="0"
+                            required>
+
+                    </div>
+
+
+
+                    <!-- PAYMENT METHOD -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Payment Method
+                        </label>
+
+                        <select
+                            id="paymentMethod"
+                            required>
+
+                            <option value="">
+                                Select Payment Method
+                            </option>
+
+                            <option value="CASH">
+                                💵 Cash
+                            </option>
+
+                            <option value="BANK_TRANSFER">
+                                🏦 Bank Transfer
+                            </option>
+
+                            <option value="UPI">
+                                📱 UPI
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- SAVE PAYMENT BUTTON -->
+
+                <button
+                    type="submit"
+                    class="login-btn farmer-submit-btn">
+
+                    💳 Save Payment
+
+                </button>
+
+            </form>
+
+
+
+            <p id="paymentMessage"></p>
+
+        </section>
+
+
+
+        <!-- ================= PAYMENT HISTORY ================= -->
+
+        <section class="dashboard-section farmer-list-section">
+
+
+            <div class="section-header">
+
+                <div>
+
+                    <h2>
+                        Payment History
+                    </h2>
+
+                    <p>
+                        Recent farmer payment transactions
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- PAYMENT TABLE -->
+
+            <div class="table-container">
+
+                <table class="farmer-table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                ID
+                            </th>
+
+                            <th>
+                                Farmer
+                            </th>
+
+                            <th>
+                                Payment Date
+                            </th>
+
+                            <th>
+                                Amount
+                            </th>
+
+                            <th>
+                                Payment Method
+                            </th>
+
+                            <th>
+                                Action
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+
+                    <tbody id="paymentTableBody">
+
+                        <tr>
+
+                            <td colspan="6">
+                                Loading payments...
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+</div>
+
+
+
+<!-- ================= JAVASCRIPT ================= -->
+
+<script src="js/payments.js"></script>
+
+</body>
+
+</html>
